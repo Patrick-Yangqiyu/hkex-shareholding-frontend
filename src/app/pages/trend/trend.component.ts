@@ -5,6 +5,7 @@ import {TrendService} from './trend.service';
 import {format} from 'date-fns';
 import {EChartsOption} from 'echarts';
 import {Trend} from '../../core/model/trend';
+import {ColumnItem} from '../../core/model/columnitem';
 import * as _ from 'lodash';
 
 @Component({
@@ -13,27 +14,46 @@ import * as _ from 'lodash';
 
   styleUrls: ['./trend.component.css']
 })
+
+
 export class TrendComponent implements OnInit {
+  private gridApi;
+  private gridColumnApi;
+  isLoading: boolean = false;
   controlArray: Array<{ index: number; show: boolean }> = [];
   selectedStock: Stock;
   listOfStock: Array<Stock> = [];
-  validateForm!: FormGroup;
+  listOfColumns: ColumnItem[];
+  validateForm: FormGroup;
   selectedDate: Date[];
   selectedDateRangeArray: string[];
   mergeOption: EChartsOption = {};
   chartOption: EChartsOption = {};
   tableData: Array<Trend> = [];
+  columnDefs: any[] = [
+    {field: 'ParticipantCode', sortable: true, filter: true},
+    {field: 'ParticipantName', sortable: true, filter: true},
+    {field: 'RecordDate', sortable: true, filter: true},
+    {field: 'Percentage', sortable: true, filter: true, valueFormatter: params => params.value + '%'},
+    {
+      field: 'Shareholding',
+      sortable: true,
+      filter: true,
+      valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+    }
+  ];
 
   search(): void {
-
+    this.isLoading = true;
     this.selectedDateRangeArray = TrendComponent.getDatesBetweenDates(this.selectedDate[0], this.selectedDate[1]);
-
+    this.gridApi.showLoadingOverlay();
     this.service.getTrend({
       'stock_code': this.selectedStock.stock_code,
       'start_date': format(this.selectedDate[0], 'yyyyMMdd'),
       'end_date': format(this.selectedDate[1], 'yyyyMMdd')
     }).subscribe(
       data => {
+        this.isLoading = false;
         this.refreshChart(data);
         this.tableData = data;
       }
@@ -142,4 +162,16 @@ export class TrendComponent implements OnInit {
     dates = [...dates, format(endDate, 'yyyy-MM-dd')];
     return dates;
   }
+
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    params.api.sizeColumnsToFit();
+  }
+
+  onRowChanged(params) {
+    params.api.sizeColumnsToFit();
+  }
+
+
 }

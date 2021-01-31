@@ -21,7 +21,7 @@ import {NZ_ICONS} from 'ng-zorro-antd/icon';
 import {IconDefinition} from '@ant-design/icons-angular';
 import * as AllIcons from '@ant-design/icons-angular/icons';
 import {NgxEchartsModule} from 'ngx-echarts';
-// import {NsAutoHeightTableDirective} from 'zorro-sharper';
+import {AgGridModule} from 'ag-grid-angular';
 
 
 registerLocaleData(en);
@@ -48,6 +48,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(key => antDesign
     NzMenuModule,
     ReactiveFormsModule,
     NgZorroAntdModule,
+    AgGridModule.withComponents([]),
     NgxEchartsModule.forRoot({
       echarts: () => {
         return import('echarts');

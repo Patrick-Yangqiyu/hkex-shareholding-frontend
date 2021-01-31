@@ -30,35 +30,20 @@
   </div>
 </form>
 <div class="search-result-list">
-  <div nz-row [nzGutter]="24">
-    <div nz-col [nzSm]="12" [nzXs]="24">
-      <div echarts [options]="chartOption" [merge]="mergeOption" [autoResize]="true" id="result-chart"></div>
+  <div nz-row [nzGutter]="24" class="result">
+    <div nz-col [nzLg]="12" [nzSm]="24" [nzXs]="24">
+      <div echarts [options]="chartOption" [loading]="isLoading" [merge]="mergeOption" [autoResize]="true" id="result-chart"></div>
     </div>
-    <div nz-col [nzSm]="12" [nzXs]="24">
-      <nz-table nsAutoHeightTable="10" #basicTable [nzData]="tableData"
-                [nzFrontPagination]="false"
-                [nzShowPagination]="false"
+    <div nz-col [nzLg]="12" [nzSm]="24" [nzXs]="24">
+      <ag-grid-angular id="result-table"
+                       style="width: 100%; height: 100%;"
+                       class="ag-theme-alpine"
+                       [rowData]="tableData"
+                       [columnDefs]="columnDefs"
+                       (gridReady)="onGridReady($event)"
+                       (rowDataChanged) = "onRowChanged($event)"
       >
-        <thead>
-        <tr>
-          <th>ParticipantCode</th>
-          <th>ParticipantName</th>
-          <th>Date</th>
-          <th>Shareholding</th>
-          <th>Percentage</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let data of basicTable.data">
-          <td>{{data.ParticipantCode}}</td>
-          <td>{{data.ParticipantName}}</td>
-          <td>{{data.RecordDate}}</td>
-          <td>{{data.Shareholding}}</td>
-          <td>{{data.Percentage}}</td>
-        </tr>
-        </tbody>
-      </nz-table>
+      </ag-grid-angular>
     </div>
 
   </div>

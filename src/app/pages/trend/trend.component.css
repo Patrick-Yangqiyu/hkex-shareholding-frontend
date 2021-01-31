@@ -33,6 +33,9 @@
       .search-area {
         text-align: right;
       }
-     #result-chart{
-        height: 100%;
+     .result{
+       height: calc(100% - 10px);
+     }
+      #result-chart{
+        height: 100% !important;
       }
