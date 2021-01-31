@@ -1,0 +1,67 @@
+<form nz-form [formGroup]="validateForm" class="ant-advanced-search-form">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSm]="10" [nzXs]="12">
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="12" nzRequired>Stock</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="12">
+          <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Stock" [(ngModel)]="selectedStock"
+                     formControlName="stock">
+            <nz-option *ngFor="let option of listOfStock" [nzLabel]="option.stock_label" [nzValue]="option"></nz-option>
+          </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div nz-col [nzSm]="8" [nzXs]="12">
+
+      <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Date</nz-form-label>
+        <nz-form-control [nzSm]="18" [nzXs]="24">
+          <nz-range-picker formControlName="rangePicker" formControlName="date"
+                           [(ngModel)]="selectedDate"></nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div nz-col [nzSm]="6" [nzXs]="12" class="search-area">
+      <button nz-button [nzType]="'primary'" (click)="search()" [disabled]="!validateForm.valid">Search</button>
+      <button nz-button (click)="resetForm()">Clear</button>
+    </div>
+  </div>
+</form>
+<div class="search-result-list">
+  <div nz-row [nzGutter]="24">
+    <div nz-col [nzSm]="12" [nzXs]="24">
+      <div echarts [options]="chartOption" [merge]="mergeOption" [autoResize]="true" id="result-chart"></div>
+    </div>
+    <div nz-col [nzSm]="12" [nzXs]="24">
+      <nz-table nsAutoHeightTable="10" #basicTable [nzData]="tableData"
+                [nzFrontPagination]="false"
+                [nzShowPagination]="false"
+      >
+        <thead>
+        <tr>
+          <th>ParticipantCode</th>
+          <th>ParticipantName</th>
+          <th>Date</th>
+          <th>Shareholding</th>
+          <th>Percentage</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{data.ParticipantCode}}</td>
+          <td>{{data.ParticipantName}}</td>
+          <td>{{data.RecordDate}}</td>
+          <td>{{data.Shareholding}}</td>
+          <td>{{data.Percentage}}</td>
+        </tr>
+        </tbody>
+      </nz-table>
+    </div>
+
+  </div>
+
+
+</div>
