@@ -1,35 +1,44 @@
 
-      .ant-advanced-search-form {
-        padding: 24px;
-        background: #fbfbfb;
-        border: 1px solid #d9d9d9;
-        border-radius: 6px;
-      }
+.ant-advanced-search-form {
+  padding: 24px;
+  background: #fbfbfb;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+}
 
-      .search-result-list {
-        margin-top: 16px;
-        border: 1px dashed #e9e9e9;
-        border-radius: 6px;
-        background-color: #fafafa;
-        min-height: 200px;
-        text-align: center;
-        padding-top: 80px;
-      }
+.search-result-list {
+  margin-top: 16px;
+  border: 1px dashed #e9e9e9;
+  border-radius: 6px;
+  background-color: #fafafa;
+  min-height: 200px;
+  text-align: center;
+  height: calc(100% - 110px);
 
-      [nz-form-label] {
-        overflow: visible;
-      }
+}
 
-      button {
-        margin-left: 8px;
-      }
+[nz-form-label] {
+  overflow: visible;
+}
 
-      .collapse {
-        margin-left: 8px;
-        font-size: 12px;
-      }
+button {
+  margin-left: 8px;
+}
 
-      .search-area {
-        text-align: right;
-      }
-    
+.collapse {
+  margin-left: 8px;
+  font-size: 12px;
+}
+
+.search-area {
+  text-align: right;
+}
+
+
+.participant {
+  background-color: #90AFC5;
+}
+
+.counterparty {
+  background-color: #336B87;
+}

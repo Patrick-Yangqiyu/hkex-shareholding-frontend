@@ -7,6 +7,7 @@ import {EChartsOption} from 'echarts';
 import {Trend} from '../../core/model/trend';
 import {ColumnItem} from '../../core/model/columnitem';
 import * as _ from 'lodash';
+import {CoreService} from '../../core/service/core.service';
 
 @Component({
   selector: 'app-trend',
@@ -19,17 +20,23 @@ import * as _ from 'lodash';
 export class TrendComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
+  private echartsInstance;
+
   isLoading: boolean = false;
   controlArray: Array<{ index: number; show: boolean }> = [];
   selectedStock: Stock;
   listOfStock: Array<Stock> = [];
-  listOfColumns: ColumnItem[];
+
   validateForm: FormGroup;
   selectedDate: Date[];
   selectedDateRangeArray: string[];
   mergeOption: EChartsOption = {};
+
   chartOption: EChartsOption = {};
+
   tableData: Array<Trend> = [];
+  listOfColumns: ColumnItem[];
+
   columnDefs: any[] = [
     {field: 'ParticipantCode', sortable: true, filter: true},
     {field: 'ParticipantName', sortable: true, filter: true},
@@ -64,13 +71,15 @@ export class TrendComponent implements OnInit {
 
   resetForm(): void {
     this.validateForm.reset();
+    this.gridApi.setRowData([]);
+    this.echartsInstance.clear();
   }
 
-  constructor(private fb: FormBuilder, private service: TrendService) {
+  constructor(private fb: FormBuilder, private service: TrendService, private coreservice: CoreService) {
   }
 
   ngOnInit(): void {
-    this.service.getStocks().subscribe(stocks => {
+    this.coreservice.getStocks().subscribe(stocks => {
         this.listOfStock = stocks;
       }
     );
@@ -81,6 +90,7 @@ export class TrendComponent implements OnInit {
   }
 
   refreshChart(data: Trend[]): void {
+    this.echartsInstance.clear();
     const grouped = _.groupBy(data, row => row.ParticipantCode + ':' + row.ParticipantName);
     let new_series = [];
     let legend_names = [];
@@ -173,5 +183,8 @@ export class TrendComponent implements OnInit {
     params.api.sizeColumnsToFit();
   }
 
+  onChartInit(ec) {
+    this.echartsInstance = ec;
+  }
 
 }

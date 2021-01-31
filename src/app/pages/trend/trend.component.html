@@ -32,7 +32,8 @@
 <div class="search-result-list">
   <div nz-row [nzGutter]="24" class="result">
     <div nz-col [nzLg]="12" [nzSm]="24" [nzXs]="24">
-      <div echarts [options]="chartOption" [loading]="isLoading" [merge]="mergeOption" [autoResize]="true" id="result-chart"></div>
+      <div echarts [options]="chartOption" [loading]="isLoading" [merge]="mergeOption" [autoResize]="true"
+           id="result-chart" (chartInit)="onChartInit($event)"></div>
     </div>
     <div nz-col [nzLg]="12" [nzSm]="24" [nzXs]="24">
       <ag-grid-angular id="result-table"
@@ -41,7 +42,7 @@
                        [rowData]="tableData"
                        [columnDefs]="columnDefs"
                        (gridReady)="onGridReady($event)"
-                       (rowDataChanged) = "onRowChanged($event)"
+                       (rowDataChanged)="onRowChanged($event)"
       >
       </ag-grid-angular>
     </div>
