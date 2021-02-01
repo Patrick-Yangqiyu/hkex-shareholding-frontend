@@ -16,7 +16,7 @@
         padding-top: 10px;
         height:calc(100% - 100px);
         height:-moz-calc(100% - 100px);
-        height:-webkit-calc(100% - 100px);
+        height:-webkit-calc(100vh - 100px);
       }
 
       [nz-form-label] {
@@ -38,7 +38,7 @@
      .result{
        height:calc(100% - 10px);
        height:-moz-calc(100% - 10px);
-       height:-webkit-calc(100% - 10px);
+       height:-webkit-calc(100vh - 10px);
      }
       #result-chart{
         height: 100% !important;
