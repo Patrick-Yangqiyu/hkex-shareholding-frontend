@@ -38,15 +38,15 @@ export class TrendComponent implements OnInit {
   listOfColumns: ColumnItem[];
 
   columnDefs: any[] = [
-    {field: 'ParticipantCode', sortable: true, filter: true},
-    {field: 'ParticipantName', sortable: true, filter: true},
-    {field: 'RecordDate', sortable: true, filter: true},
-    {field: 'Percentage', sortable: true, filter: true, valueFormatter: params => params.value + '%'},
+    {field: 'ParticipantCode', sortable: true, filter: true , resizable: true},
+    {field: 'ParticipantName', sortable: true, filter: true , resizable: true},
+    {field: 'RecordDate', sortable: true, filter: true , resizable: true},
+    {field: 'Percentage', sortable: true, filter: true, valueFormatter: params => params.value + '%' , resizable: true},
     {
       field: 'Shareholding',
       sortable: true,
       filter: true,
-      valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+      valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') , resizable: true
     }
   ];
 

@@ -24,19 +24,20 @@ export class TransactionComponent implements OnInit {
   private gridColumnApi;
   tableData: Array<Transaction> = [];
   columnDefs: any[] = [
+
     {
       headerName: 'Participant',
       headerClass: 'participant',
       children: [
-        {field: 'RecordDate', sortable: true, filter: true},
-        {field: 'ParticipantCode', sortable: true, filter: true},
-        {field: 'ParticipantName', sortable: true, filter: true},
-        {field: 'Percentage', sortable: true, filter: true, valueFormatter: params => params.value + '%'},
+        {field: 'RecordDate', sortable: true, filter: true , resizable: true },
+        {field: 'ParticipantCode', sortable: true, filter: true , resizable: true},
+        {field: 'ParticipantName', sortable: true, filter: true , resizable: true},
+        {field: 'Percentage', sortable: true, filter: true, valueFormatter: params => params.value + '%' , resizable: true},
         {
           field: 'Shareholding',
           sortable: true,
           filter: true,
-          valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+          valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') , resizable: true
         },
 
         {
@@ -45,7 +46,7 @@ export class TransactionComponent implements OnInit {
           sortable: true,
           filter: true,
           valueFormatter: params => params.value.toFixed(2) + '%',
-          cellStyle: params => params.value >= 0 ? {color: 'green'} : {color: 'red'}
+          cellStyle: params => params.value >= 0 ? {color: 'green'} : {color: 'red'} , resizable: true
         }, {
           headerName: 'ΔShareholding',
           field: 'DiffShs',
@@ -53,7 +54,7 @@ export class TransactionComponent implements OnInit {
           filter: true,
           valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
           cellStyle: params => params.value >= 0 ? {color: 'green'} : {color: 'red'}
-        },
+          , resizable: true },
       ]
     },
     {
@@ -67,7 +68,7 @@ export class TransactionComponent implements OnInit {
           filter: true,
           valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
           cellStyle: params => params.value >= 0 ? {color: 'green'} : {color: 'red'}
-        },
+          , resizable: true},
         {
           headerName: 'ΔCpty_Percentage',
           field: 'cpty_DiffPercentage',
@@ -75,16 +76,16 @@ export class TransactionComponent implements OnInit {
           filter: true,
           valueFormatter: params => params.value.toFixed(2) + '%',
           cellStyle: params => params.value >= 0 ? {color: 'green'} : {color: 'red'}
-        },
+          , resizable: true},
 
-        {field: 'cpty_ParticipantCode', sortable: true, filter: true},
-        {field: 'cpty_ParticipantName', sortable: true, filter: true},
-        {field: 'cpty_Percentage', sortable: true, filter: true, valueFormatter: params => params.value + '%'},
+        {field: 'cpty_ParticipantCode', sortable: true, filter: true , resizable: true},
+        {field: 'cpty_ParticipantName', sortable: true, filter: true , resizable: true},
+        {field: 'cpty_Percentage', sortable: true, filter: true, valueFormatter: params => params.value + '%' , resizable: true},
         {
           field: 'cpty_Shareholding',
           sortable: true,
           filter: true,
-          valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+          valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') , resizable: true
         },
 
       ]
