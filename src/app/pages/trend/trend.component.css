@@ -14,7 +14,9 @@
         min-height: 200px;
         text-align: center;
         padding-top: 10px;
-        height: calc(100% - 110px);
+        height:calc(100% - 100px);
+        height:-moz-calc(100% - 100px);
+        height:-webkit-calc(100% - 100px);
       }
 
       [nz-form-label] {
@@ -34,7 +36,9 @@
         text-align: right;
       }
      .result{
-       height: calc(100% - 10px);
+       height:calc(100% - 10px);
+       height:-moz-calc(100% - 10px);
+       height:-webkit-calc(100% - 10px);
      }
       #result-chart{
         height: 100% !important;

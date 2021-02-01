@@ -13,8 +13,9 @@
   background-color: #fafafa;
   min-height: 200px;
   text-align: center;
-  height: calc(100% - 110px);
-
+  height:calc(100% - 100px);
+  height:-moz-calc(100% - 100px);
+  height:-webkit-calc(100% - 100px);
 }
 
 [nz-form-label] {
