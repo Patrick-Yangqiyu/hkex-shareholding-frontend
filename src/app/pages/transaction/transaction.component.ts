@@ -66,7 +66,9 @@ export class TransactionComponent implements OnInit {
           field: 'cpty_DiffShs',
           sortable: true,
           filter: true,
-          valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ','),
+          valueFormatter:  params => {
+            return params.value.toLocaleString('en-US');
+          },
           cellStyle: params => params.value >= 0 ? {color: 'green'} : {color: 'red'}
           , resizable: true},
         {
@@ -85,7 +87,9 @@ export class TransactionComponent implements OnInit {
           field: 'cpty_Shareholding',
           sortable: true,
           filter: true,
-          valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') , resizable: true
+          valueFormatter: params => {
+            return params.value.toLocaleString('en-US');
+          }, resizable: true
         },
 
       ]

@@ -46,7 +46,9 @@ export class TrendComponent implements OnInit {
       field: 'Shareholding',
       sortable: true,
       filter: true,
-      valueFormatter: params => params.value.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',') , resizable: true
+      valueFormatter: params => {
+        return params.value.toLocaleString('en-US');
+      }, resizable: true
     }
   ];
 
